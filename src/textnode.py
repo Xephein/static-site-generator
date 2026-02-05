@@ -26,17 +26,6 @@ class TextNode():
 
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
-
-    def to_html_node(self):
-        if self.text_type not in TextType:
-            raise Exception(f"{self.text_type} is invalid")
-        tag = self.text_type_to_tag()
-        if self.text_type.value in ("normal", "bold", "italic", "code"):
-            return LeafNode(tag, self.text)
-        elif self.text_type.value == "link":
-            return LeafNode(tag, self.text, {"href": self.url})
-        elif self.text_type.value == "image":
-            return LeafNode(tag, "", {"src": self.url, "alt": self.text})
        
     def text_type_to_tag(self):
         match self.text_type:
